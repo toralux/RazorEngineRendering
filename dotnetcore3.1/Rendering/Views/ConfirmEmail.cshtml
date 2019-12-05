@@ -1,0 +1,37 @@
+﻿@using System
+@using System.Linq
+@using System.Web
+@model Rendering.Models.RenderBase<Rendering.Models.ConfirmEmail>
+@{
+    Layout = "_EmailBodyLayout";
+}
+
+@{
+    var content = Model.Content;
+    var confirmUrl = ViewBag.ClientBasePath + $"/confirm-email/{HttpUtility.UrlEncode(content.UserName)}/{HttpUtility.UrlEncode(content.Code)}";
+}
+
+@*
+    Bekreft din e-postadresse @Model.Content.Email på Bilmarked.<br />
+    <br />
+    Du må verifisere din e-postadresse ved å trykke <a href="@confirmUrl">her</a> for å kunne bruke visse funksjoner.
+*@
+
+<div class="top-header row" style="padding: 0 16px;">
+    <table class="row__table" width="100%" align="center" role="presentation" border="0" cellpadding="0" cellspacing="0" style="table-layout: fixed;">
+        <tr class="row__row">
+            <td class="column col-sm-12" width="800" style="width: 100%" align="left" valign="top">
+
+                @await Html.PartialAsync("_EmailBodyLogo")
+
+                <p class="font-weight-custom-bold text p" style="display: block; line-height: 20px; color: #333333; font-family: 'Nunito',sans-serif; font-size: 16px; margin: 0 0 16px; font-weight: 500;">
+                    Bekreft din e-postadresse @Model.Content.Email på Bilmarked.
+                </p>
+
+                <p class="font-weight-custom-bold text p" style="display: block; line-height: 20px; color: #333333; font-family: 'Nunito',sans-serif; font-size: 16px; margin: 0 0 16px; font-weight: 500;">
+                    Du må verifisere din e-postadresse ved å trykke <a href="@confirmUrl">her</a> for å kunne bruke visse funksjoner.
+                </p>
+            </td>
+        </tr>
+    </table>
+</div>
